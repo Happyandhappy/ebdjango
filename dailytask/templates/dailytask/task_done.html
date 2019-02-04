@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}Good job! Task done{% endblock %}
+
+{% block content %}
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="padding:40px 15px;margin:50px 0px 20px 0px;">
+                <h2 class="text-center" style="color:rgb(255,255,255);">{{ task.title }}</h2>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container" style="margin-bottom:40px;">
+        <div class="col-8 mx-auto">
+            <p>{{ task.done_message }}</p>
+        </div>
+    </div>
+</div>
+<h3 class="text-center" style="color:#36dd69;font-size:22;">Daily task complete, good job!</h3>
+<div class="container" style="margin-bottom:40px;">
+    <div class="col-8 mx-auto">
+        <p class="text-center">New task will be available tomorrow.</p>
+    </div>
+</div>
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-3 col-sm-4 col-md-3 col-lg-3 col-xl-3 mx-auto"><a href="{% url 'detail' task.id %}" ><button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Review Task</button></a></div>
+        </div>
+    </div>
+</div>
+{% endblock %}

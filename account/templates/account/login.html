@@ -1,0 +1,42 @@
+{% extends "register_layout.html" %}
+{% load static from staticfiles %}
+{% block title %}Login{% endblock %}
+{% block form %}
+{% load eli_brackets %}
+<form method="post">
+{% csrf_token %}
+    <img class="img-fluid" src="{% static "img/Task-of-the-day-logo-light.png" %}">
+    {% if form.errors %}
+        <p><Strong>Username or password is not correct</Strong></p>
+    {% endif %}
+    <div class="form-group">
+         <div class="col-sm-offset-2 col-sm-10">
+            {% if form.username.errors %}
+                <ul>
+                {% for cur_error in form.username.errors %}
+                    <li><span class="text-danger small">{{ cur_error | safe | eli_brackets }}</span></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input class="form-control" type="text" name="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% if form.password.errors %}
+                <ul>
+                {% for cur_error in form.password.errors %}
+                    <li><span class="text-danger small">{{ cur_error | safe | eli_brackets }}</span></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input class="form-control" type="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">Login</button>
+    </div>
+    <a href="/reset-password" class="forgot">Forgot your password?</a>
+    <a href="/register" class="forgot" style="margin-top:10px;">Create account</a>
+</form>
+{% endblock %}

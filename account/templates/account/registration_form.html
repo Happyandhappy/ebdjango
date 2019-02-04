@@ -1,0 +1,62 @@
+{% extends "register_layout.html" %}
+{% load static from staticfiles %}
+{% block title %}Register{% endblock %}
+{% load eli_brackets %}
+{% block form %}
+<form method="post">
+{% csrf_token %}
+    <img class="img-fluid" src="{% static "img/Task-of-the-day-logo-light.png" %}">
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% if form.username.errors %}
+                <ul>
+                {% for cur_error in form.username.errors %}
+                    <li><span class="text-danger small">{{ cur_error | safe | eli_brackets }}</span></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input class="form-control" type="text" name="username" placeholder="Username" required>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% if form.email.errors %}
+                <ul>
+                {% for cur_error in form.email.errors %}
+                    <li><span class="text-danger small">{{ cur_error | safe | eli_brackets }}</span></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input class="form-control" type="email" name="email" placeholder="Email" required>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% if form.password.errors %}
+                <ul>
+                {% for cur_error in form.password.errors %}
+                    <li><span class="text-danger small">{{ cur_error | safe | eli_brackets }}</span></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input class="form-control" type="password" name="password" placeholder="Password" required>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            {% if form.confirm_password.errors %}
+                <ul>
+                {% for cur_error in form.confirm_password.errors %}
+                    <li><span class="text-danger small">{{ cur_error | safe | eli_brackets }}</span></li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <input class="form-control" type="password" name="confirm_password" placeholder="Confirm Password" required>
+    </div>
+    <div class="form-group">
+        <button class="btn btn-primary btn-block" type="submit">Create Account</button>
+    </div>
+    <a href="/login" class="forgot">Already got an account? Login here.</a>
+</form>
+{% endblock %}

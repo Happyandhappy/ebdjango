@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+<div>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12" style="padding:50px 15px;margin:100px 0px 20px 0px;">
+                {% if daily_task_done %}
+                <h2 class="text-center" style="color:rgb(255,255,255);">Good job! Daily task if completed. Persistence is key.</h2>
+                {% else %}
+                <h2 class="text-center" style="color:rgb(255,255,255);">Select a category you would like to improve</h2>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <div class="container">
+        <div class="row">
+            {% if daily_task_done %}
+            <h2 class="text-center" style="color:rgb(255,255,255);">Check back tomorrow for the next task.</h2>
+            {% else %}
+            <div class="col-md-4" style="padding:20px;"><a href="{% url 'traffic' %}"><button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);">Traffic</button></a></div>
+            <div class="col-md-4" style="padding:20px;padding-top:20px;"><a href="{% url 'conversionrate' %}"><button class="btn btn-primary btn-block" type="button">Conversion Rate</button></a></div>
+            <div class="col-md-4" style="padding:20px;"><a href="{% url 'marketing' %}"><button class="btn btn-primary btn-block" type="button">Marketing</button></a></div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
