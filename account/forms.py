@@ -2,7 +2,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from account.models import UserProfile
-
+from django.contrib.auth import password_validation
 
 class RegisterForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
@@ -16,6 +16,10 @@ class RegisterForm(forms.ModelForm):
         cleaned_data = super(RegisterForm, self).clean()
         password = cleaned_data.get("password")
         confirm_password = cleaned_data.get("confirm_password")
+        try:
+            password_validation.validate_password(password, self.instance)
+        except forms.ValidationError as error:
+            self.add_error('password', error)
 
         if password != confirm_password:
             self._errors['password'] = self._errors.get('password', [])

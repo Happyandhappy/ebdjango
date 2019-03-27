@@ -10,7 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserChangeForm, PasswordChangeForm
 from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.decorators import login_required
-
+from django.http import JsonResponse
 
 class RegisterFormView(View):
     form_class = RegisterForm
@@ -69,6 +69,16 @@ def edit_profile(request):
         args = {'form': form}
         return render(request, 'account/edit_profile.html', args)
 
+def setTimeZone(request):
+    if request.method == 'GET':
+        try:
+            timezone = request.GET['timezone']
+            user = request.user
+            user.userprofile.timezone = timezone
+            user.userprofile.save()
+        except Exception as e:
+            print(e)
+    return JsonResponse({'message':'success'})
 
 def change_password(request):
     if request.method == 'POST':

@@ -5,9 +5,10 @@
 {% block form %}
 <form method="post">
 {% csrf_token %}
+    <style>ul{padding-inline-start:25px;}</style>
     <img class="img-fluid" src="{% static "img/Task-of-the-day-logo-light.png" %}">
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-12 p-0">
             {% if form.username.errors %}
                 <ul>
                 {% for cur_error in form.username.errors %}
@@ -16,10 +17,10 @@
                 </ul>
             {% endif %}
         </div>
-        <input class="form-control" type="text" name="username" placeholder="Username" required>
+        <input class="form-control" type="hidden" id="username" name="username" placeholder="Username">
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-12 p-0">
             {% if form.email.errors %}
                 <ul>
                 {% for cur_error in form.email.errors %}
@@ -28,10 +29,10 @@
                 </ul>
             {% endif %}
         </div>
-        <input class="form-control" type="email" name="email" placeholder="Email" required>
+        <input class="form-control" type="email" name="email" id="email" placeholder="Email" required>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-12 p-0">
             {% if form.password.errors %}
                 <ul>
                 {% for cur_error in form.password.errors %}
@@ -43,7 +44,7 @@
         <input class="form-control" type="password" name="password" placeholder="Password" required>
     </div>
     <div class="form-group">
-        <div class="col-sm-offset-2 col-sm-10">
+        <div class="col-sm-12 p-0">
             {% if form.confirm_password.errors %}
                 <ul>
                 {% for cur_error in form.confirm_password.errors %}
@@ -59,4 +60,11 @@
     </div>
     <a href="/login" class="forgot">Already got an account? Login here.</a>
 </form>
+<script>
+    document.getElementById('email').addEventListener('change', function(e){
+        console.log(e.target.value);
+        document.getElementById('username').value = e.target.value;
+    });
+    //console.log(document.getElementById('username').value);
+</script>
 {% endblock %}

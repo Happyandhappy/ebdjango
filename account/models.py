@@ -5,13 +5,13 @@ from django.contrib.auth.signals import user_logged_in
 import datetime
 from datetime import datetime, timedelta
 
-
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     daily_task = models.IntegerField(default=0)
     daily_task_done = models.BooleanField(default=False)
     daily_task_done_time = models.DateTimeField(default=datetime.now() - timedelta(days=2))
     current_step = models.IntegerField(default=0)
+    timezone = models.CharField(max_length=255, default='0', blank=True, null=True, )
 
 
 def create_profile(sender, **kwargs):
