@@ -26,21 +26,29 @@
         </div>
     </div>
 </div>
-<div class="space col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 mx-auto">
+<div class="space col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 mx-auto">
 {% if step %}
-    {% if previous_step_pk %}
-        <a href="{% url 'step' task_pk=step.task.pk step_pk=pre_step_pk %}">
-            <button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Previous Step</button>
-        </a>
-    {% endif %}
-    {% if next_step_pk %}
-        <a href="{% url 'step' task_pk=step.task.pk step_pk=next_step_pk %}">
-            <button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Next Step</button>
-        </a>
-    {% else %}
-        <a href="{% url 'finish_task' pk=step.task.pk %}">
-            <button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Finish Task</button>
-        </a>
+    <div class="row">
+        {% if previous_step_pk %}
+        <div class="col-md-6">
+            <a href="{% url 'step' task_pk=step.task.pk step_pk=previous_step_pk %}">
+                <button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Previous Step</button>
+            </a>
+        </div>
+        {% endif %}
+        {% if next_step_pk %}
+        <div class="col-md-6">
+            <a href="{% url 'step' task_pk=step.task.pk step_pk=next_step_pk %}">
+                <button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Next Step</button>
+            </a>
+        </div>
+        {% else %}
+        <div class="col-md-6">
+            <a href="{% url 'finish_task' pk=step.task.pk %}">
+                <button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);margin-bottom:0px;">Finish Task</button>
+            </a>
+        </div>
+    </div>
     {% endif %}
  {% else %}
     <p>There is no task. </p>

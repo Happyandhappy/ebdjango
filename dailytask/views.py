@@ -104,13 +104,20 @@ def step_detail(request, task_pk, step_pk):
             step = step_list[0]
         else:
             step = None
+
+        previous_step_pk = step_pk -1
+        previous_step = Step.objects.filter(Q(task_id=task_pk) & Q(step_number=previous_step_pk))
+        if previous_step.count() == 0:
+            previous_step_pk = None
+
         next_step_pk = step_pk + 1
         next_step = Step.objects.filter(Q(task_id=task_pk) & Q(step_number=next_step_pk))
+
         if next_step.count() == 0:
             user.userprofile.daily_task_done = True
             user.userprofile.save()
             next_step_pk = None
 
         return render(request, 'dailytask/step_detail.html', {'step': step,
-                                                              'next_step_pk': next_step_pk,
+                                                              'next_step_pk': next_step_pk, 'previous_step_pk' : previous_step_pk
                                                               })
