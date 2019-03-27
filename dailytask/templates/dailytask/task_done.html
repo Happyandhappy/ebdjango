@@ -25,6 +25,7 @@
         <p class="text-center">New task will be available tomorrow.</p>
     </div>
 </div>
+{% if task.task_can_be_repeated %}
 <div>
     <div class="container">
         <div class="row">
@@ -32,4 +33,5 @@
         </div>
     </div>
 </div>
+{% endif %}
 {% endblock %}

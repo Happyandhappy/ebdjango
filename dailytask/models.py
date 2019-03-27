@@ -21,7 +21,6 @@ class Task(models.Model):
     video_url = models.CharField(max_length=255, default="")
     task_can_be_repeated = models.BooleanField(default=False)
 
-
     def __str__(self):
         return self.title
 
