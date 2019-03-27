@@ -12,7 +12,7 @@ class UserProfile(models.Model):
     daily_task_done_time = models.DateTimeField(default=datetime.now() - timedelta(days=2))
     current_step = models.IntegerField(default=0)
     timezone = models.CharField(max_length=255, default='0', blank=True, null=True, )
-
+    completed_at = models.TextField(null=True, default="", blank=True)
 
 def create_profile(sender, **kwargs):
     if kwargs['created']:

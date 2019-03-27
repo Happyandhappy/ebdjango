@@ -19,6 +19,8 @@ class Task(models.Model):
     category = models.CharField(max_length=255, choices=CATEGORIES, default="traffic")
     done_message = models.TextField(null=True, default="")
     video_url = models.CharField(max_length=255, default="")
+    task_can_be_repeated = models.BooleanField(default=False)
+
 
     def __str__(self):
         return self.title

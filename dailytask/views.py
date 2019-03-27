@@ -5,9 +5,19 @@ import random
 from .models import Task, Step
 from django.db.models import Q
 from django.contrib.auth.models import User
-import datetime
+import datetime, json
 from datetime import datetime
 
+
+def saveUser(request):
+    user = request.user
+    if user.userprofile.completed_at=='':
+        user.userprofile.completed_at = json.dumps([{'task': user.userprofile.daily_task, 'completed_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")}])
+    else:
+        values = json.loads(user.userprofile.completed_at)
+        values.append({'task':user.userprofile.daily_task, 'completed_at': datetime.now().strftime("%Y-%m-%d %H:%M:%S")})
+        user.userprofile.completed_at = json.dumps(values)
+    user.userprofile.save()
 
 @login_required(login_url="/login")
 def task_done(request, pk):
@@ -26,7 +36,6 @@ def traffic_task(request):
     user = request.user
     if user.userprofile.daily_task == 0:
         tasks_traffic = Task.objects.filter(category="traffic")
-
         random_task = random.choice(tasks_traffic)
         task_id = random_task.pk
         user = request.user
@@ -115,6 +124,7 @@ def step_detail(request, task_pk, step_pk):
 
         if next_step.count() == 0:
             user.userprofile.daily_task_done = True
+            saveUser(request)
             user.userprofile.save()
             next_step_pk = None
 
