@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import include, path
 from . import views
 from account import views as account_views
+from payment import views as payment_views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
 from django.conf.urls import url, include
@@ -32,6 +33,8 @@ urlpatterns = [
     path('tasks/', include('dailytask.urls')),
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
+    path('payment/', include('payment.urls')),
+
 ]
 
 urlpatterns += staticfiles_urlpatterns()

@@ -26,6 +26,7 @@ def update_task(sender, user, request, **kwargs):
     user = request.user
     current_date = datetime.now()
     if user.userprofile.daily_task_done_time.day != current_date.day:
+        user.userprofile.daily_task_done = False
         user.userprofile.daily_task = 0
         user.userprofile.current_step = 0
         user.userprofile.save()

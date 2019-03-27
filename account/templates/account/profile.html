@@ -7,19 +7,50 @@
 
 <div>
     <div class="container">
+
         <div class="row">
             <div class="col-md-12" style="padding:40px 15px;margin:50px 0px 20px 0px;">
                 <h1>Account</h1>
                 <p>Username: {{ user }}</p>
                 <p>Email: {{ user.email }}</p>
-                <form action="/accounts/profile/edit">
-                    <input type="submit" value="Change Email" />
-                </form>
-                <form action="/accounts/profile/password">
-                    <input type="submit" value="Change Password" />
-                </form>
+              
             </div>
+            <div class="row">
+                <div class="col-sm">
+                    <form action="/accounts/profile/edit">
+                    <input class="btn" type="submit" value="Change Email" />
+                    </form>
+                </div>
+                <div class="col-sm">
+                    <form  action="/accounts/profile/password">
+                    <input  class="btn" type="submit" value="Change Password" />
+                    </form>
+                </div>
+                <div class="col-sm">
+                    {% if not user.subscription %}
+                    <form action="{% url 'subscription' %} " >
+                    <input class="btn"  type="submit" value="Activate membership" />
+                    </form>
+                    {% endif %}
+                    {% if user.subscription %}
+                    <form action="{% url 'subscription' %} " >
+                    <input class="btn"  type="submit" value="DeActivate membership" />
+                    </form>
+                    {% endif %}
+                </div>
+                <div class="col-sm">
+                    <form  action="{% url 'card_register' %} " >
+                    <input  class="btn" type="submit" value="Manage Card" />
+                    </form>
+                </div>
+            </div>
+
+
         </div>
+
+
+
+
     </div>
 </div>
 

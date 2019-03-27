@@ -6,6 +6,7 @@ from .models import Task, Step
 from django.db.models import Q
 from django.contrib.auth.models import User
 import datetime
+from datetime import datetime
 
 
 @login_required(login_url="/login")
@@ -30,6 +31,7 @@ def traffic_task(request):
         task_id = random_task.pk
         user = request.user
         user.userprofile.daily_task = task_id
+        user.userprofile.daily_task_done_time = datetime.now()
         user.userprofile.save()
         return task_detail(request=request, pk=task_id)
     else:
@@ -47,6 +49,7 @@ def conversion_rate_task(request):
         task_id = random_task.pk
         user = request.user
         user.userprofile.daily_task = task_id
+        user.userprofile.daily_task_done_time = datetime.now()
         user.userprofile.save()
         return task_detail(request=request, pk=task_id)
     else:
@@ -64,6 +67,7 @@ def marketing_task(request):
         task_id = random_task.pk
         user = request.user
         user.userprofile.daily_task = task_id
+        user.userprofile.daily_task_done_time = datetime.now()
         user.userprofile.save()
         return task_detail(request=request, pk=task_id)
     else:
@@ -101,8 +105,10 @@ def step_detail(request, task_pk, step_pk):
         else:
             step = None
         next_step_pk = step_pk + 1
-        next_step = Step.objects.filter(step_number=next_step_pk)
+        next_step = Step.objects.filter(Q(task_id=task_pk) & Q(step_number=next_step_pk))
         if next_step.count() == 0:
+            user.userprofile.daily_task_done = True
+            user.userprofile.save()
             next_step_pk = None
 
         return render(request, 'dailytask/step_detail.html', {'step': step,

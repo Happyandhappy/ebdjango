@@ -1,6 +1,9 @@
 from django.core.management.base import BaseCommand, CommandError
 from django.contrib.auth.models import User
 from django.utils import timezone
+import os
+
+
 class Command(BaseCommand):
     help = "help"
 
@@ -9,5 +12,6 @@ class Command(BaseCommand):
         self.stdout.write("It's now %s" % time)
 
         if not User.objects.filter(username="admin").exists():
-            User.objects.create_superuser("admin", "admin@admin.com", "admin")
+            supassword = os.environ.get('SU_PASSWORD')
+            User.objects.create_superuser("admin", "elias@taskoftheday.com.com", supassword)
             self.stdout.write(self.style.SUCCESS('Successfully created new super user'))

@@ -22,11 +22,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'SECRET_KEY'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['django-env.msq4mcivaf.eu-west-2.elasticbeanstalk.com',
-                 'app.taskoftheday.com','localhost'
-                 '127.0.0.1']
+                 'app.taskoftheday.com',
+                 'localhost',
+                 '127.0.0.1',]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SESSION_COOKIE_SECURE = True
@@ -43,6 +44,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'dailytask',
     'account',
+    'payment',
 ]
 
 MIDDLEWARE = [
@@ -139,3 +141,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # )
 
 LOGIN_REDIRECT_URL = '/'
+
+
+STRIPE_CHARGE = 29.99
+STRIPE_PUBLIC_KEY = os.environ.get('STRIPE_PUBLIC_KEY')
+STRIPE_SECRET_KEY = os.environ.get('STRIPE_SECRET_KEY')

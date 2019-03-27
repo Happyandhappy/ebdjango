@@ -6,7 +6,7 @@
 <div>
     <div class="container">
         <div class="row">
-            <div class="col-md-12" style="padding:40px 15px;margin:50px 0px 20px 0px;">
+            <div class="col-md-12" style="padding:10px 15px;margin:15px 0px 15px 0px;">
                 <h2 class="text-center" style="color:rgb(255,255,255);">{{ step.title }}</h2>
             </div>
         </div>
@@ -15,16 +15,18 @@
 <div>
     <div class="container">
         <div class="row mx-auto">
-            <div class="col-12 col-sm-12 col-xl-9">
-                <iframe width="560" height="315" src="{{ step.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <div style="margin-left: 10%;" class="col-12 col-sm-12 col-xl-10">
+                    <div class="iframe-container">
+                        <center><iframe width="520" height="315" src="{{ step.video_url }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></center>
+                    </div>
             </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-3">
+            <div style="margin-left: 10%;" class="col-8 col-sm-12 col-xl-5">
                 {{ step.content|linebreaks }}
             </div>
         </div>
     </div>
 </div>
-<div class="col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 mx-auto">
+<div class="space col-6 col-sm-6 col-md-3 col-lg-2 col-xl-2 mx-auto">
 {% if step %}
     {% if previous_step_pk %}
         <a href="{% url 'step' task_pk=step.task.pk step_pk=pre_step_pk %}">
