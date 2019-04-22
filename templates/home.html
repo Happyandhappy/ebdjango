@@ -21,8 +21,8 @@
             <h2 class="text-center" style="color:rgb(255,255,255);">Check back tomorrow for the next task.</h2>
             {% else %}
             <div class="col-md-4" style="padding:20px;"><a href="{% url 'traffic' %}"><button class="btn btn-primary btn-block" type="button" style="background-color:rgba(0,123,255,0);">Traffic</button></a></div>
-            <div class="col-md-4" style="padding:20px;padding-top:20px;"><a href="{% url 'conversionrate' %}"><button class="btn btn-primary btn-block" type="button">Conversion Rate</button></a></div>
-            <div class="col-md-4" style="padding:20px;"><a href="{% url 'marketing' %}"><button class="btn btn-primary btn-block" type="button">Bounce Rate</button></a></div>
+            <div class="col-md-4" style="padding:20px;padding-top:20px;"><a href="{% url 'conversionrate' %}"><button class="btn btn-primary btn-block" type="button">Conversion Rate <span class="coming">(Coming soon)</span></button></a></div>
+            <div class="col-md-4" style="padding:20px;"><a href="{% url 'marketing' %}"><button class="btn btn-primary btn-block" type="button">Bounce Rate <span class="coming">(Coming soon)</span></button></a></div>
             {% endif %}
         </div>
     </div>

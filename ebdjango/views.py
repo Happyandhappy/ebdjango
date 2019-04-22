@@ -13,10 +13,11 @@ def index(request):
         return render(request, 'home.html')
     elif user.userprofile.daily_task_done == True:
         user = request.user
-        task_id = user.userprofile.daily_task
-        return task_done(request, pk=task_id)
+        user.userprofile.daily_task = False
+        user.userprofile.save()
+        return render(request, 'home.html')
+        # return task_done(request, pk=task_id)
     else:
-        user = request.user
         task_id = user.userprofile.daily_task
         return task_detail(request, pk=task_id)
 

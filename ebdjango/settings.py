@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['django-env.msq4mcivaf.eu-west-2.elasticbeanstalk.com',
 # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 # SESSION_COOKIE_SECURE = True
 # CSRF_COOKIE_SECURE = True
-
+# SECURE_SSL_REDIRECT = True
 # Application definition
 
 INSTALLED_APPS = [
